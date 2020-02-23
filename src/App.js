@@ -1,25 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import { makeStyles } from '@material-ui/core/styles';
+
+import Users from 'modules/users/components/Users';
+import Form from 'modules/form/components/Form';
+
+const useStyles = makeStyles({
+  appBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  menuButton: {
+    color: '#fff'
+  },
+});
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AppBar position="static" className={classes.appBar}>
+        <Link to="/users"><Button className={classes.menuButton}>Users</Button></Link>
+        <Link to="/form"><Button className={classes.menuButton}>Form</Button></Link>
+    </AppBar>
+      <Switch>
+        <Route path="/users">
+          <Users />
+        </Route>
+        <Route path="/form">
+          <Form />
+        </Route>
+        <Redirect from="/" to="/users" />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
