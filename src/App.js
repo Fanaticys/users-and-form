@@ -21,7 +21,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <AppBar position="static" className={classes.appBar}>
         <Link to="/users"><Button className={classes.menuButton}>Users</Button></Link>
         <Link to="/form"><Button className={classes.menuButton}>Form</Button></Link>
